@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/clear.bmp</file>
+        <file>images/conn.JPG</file>
+        <file>images/disconn.JPG</file>
+        <file>images/exit.bmp</file>
+    </qresource>
+</RCC>
