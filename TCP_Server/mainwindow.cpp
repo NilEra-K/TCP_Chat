@@ -60,7 +60,6 @@ void MainWindow::initHost() {
             }
         }
     }
-
 }
 
 // 获取本机 IP
@@ -130,12 +129,20 @@ void MainWindow::on_actStart_triggered() {
     QString ip = ui->cmbIP->currentText();  // IP 地址(字符串格式)
     QHostAddress addr(ip);                  // 使用构造函数将 字符型 IP 地址转化为 QHostAddress 型
     quint16 port = ui->spinPort->value();   // 端口
-    tcpServer->listen(addr, port);          // 监听
+    qDebug() << "服务器端口 : " << port;
+    // tcpServer->listen(addr, port);          // 监听
+    if(!tcpServer->listen(addr, port)) {
+        qDebug() << tcpServer->errorString();
+        ui->plainTextEdit->appendPlainText("[Error] 无法监听该端口 " + tcpServer->errorString());
+        return;
+    }
 
     // 文本编辑框输出相关的信息
     ui->plainTextEdit->appendPlainText(">>> 开始监听...");
     ui->plainTextEdit->appendPlainText(">>> 服务器地址 : " + tcpServer->serverAddress().toString());
     ui->plainTextEdit->appendPlainText(">>> 服务器端口 : " + QString::number(tcpServer->serverPort()));
+    qDebug() << "服务器端口 : " << port;
+
 
     // 更改按钮状态
     ui->actStart->setEnabled(false);

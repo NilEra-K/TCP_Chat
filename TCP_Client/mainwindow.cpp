@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->statusbar->addWidget(labelSocketState);
 
     // 本机 IP
+    initHost();
     QString localIP = getLocalIP();
     setWindowTitle(windowTitle() + "--本机IP : " + localIP);
     ui->cmbServerIP->addItem(localIP);
@@ -35,8 +36,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-// 获取本机 IP
-QString MainWindow::getLocalIP() {
+void MainWindow::initHost() {
     QString hostName = QHostInfo::localHostName();          // 本地主机名
     QHostInfo hostInfo = QHostInfo::fromName(hostName);     // 本地主机信息
     QString localIP = "";
@@ -46,10 +46,29 @@ QString MainWindow::getLocalIP() {
             QHostAddress addr = addrList.at(i);
             if(addr.protocol() == QAbstractSocket::IPv4Protocol) { // 只要得到本机的一个 IPv4 地址就直接退出循环
                 localIP = addr.toString();
+                ui->cmbServerIP->addItem(addr.toString(), QVariant(addr.toString()));
                 // break;
             }
         }
     }
+}
+
+// 获取本机 IP
+QString MainWindow::getLocalIP() {
+    //    QString hostName = QHostInfo::localHostName();          // 本地主机名
+    //    QHostInfo hostInfo = QHostInfo::fromName(hostName);     // 本地主机信息
+    //    QString localIP = "";
+    //    QList<QHostAddress> addrList = hostInfo.addresses();    // IP 地址列表
+    //    if(!addrList.isEmpty()) {
+    //        for(int i = 0; i < addrList.count(); i++) {
+    //            QHostAddress addr = addrList.at(i);
+    //            if(addr.protocol() == QAbstractSocket::IPv4Protocol) { // 只要得到本机的一个 IPv4 地址就直接退出循环
+    //                localIP = addr.toString();
+    //                // break;
+    //            }
+    //        }
+    //    }
+    QString localIP = ui->cmbServerIP->currentText();
     return localIP;
 }
 

@@ -34,6 +34,7 @@ private slots:
     void on_btnSend_clicked();
 
 private:
+    void initHost();
     QString getLocalIP();
 private:
     Ui::MainWindow *ui;
