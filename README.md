@@ -19,7 +19,7 @@ A  project about Chatting with TCP-IP By QT 6.2
 
 - 运行 ***Qt 6.2.4(MinGW 11.2.0 64bit)*** , 进入命令行界面
 
-  ![MinGW_CMD](D:\TCP_Chat\src\MinGW_CMD.png)
+  ![MinGW_CMD](./src/MinGW_CMD.png)
 
 - 使用命令切换到 `.exe` 文件夹目录下 , 使用打包命令 `windeployqt .exefile`即可将所需库打包到当前目录下
 
